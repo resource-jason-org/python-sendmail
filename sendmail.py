@@ -20,13 +20,14 @@ def sendMail(receiver):
     # msg['Cc'] = _format_addr(u'<%s>' % receiver)
     #Create message html content
     att = MIMEText(content,'html','utf-8')
-    att["Content-Type"] = 'application/octet-stream'
+    #att["Content-Type"] = 'application/octet-stream'
+    #att["Content-Type"] = 'application/alternative'
     msg.attach(att)
     # tls加密方式，通信过程加密，邮件数据安全，使用正常的smtp端口
     if auth == "ssl":
         smtp = smtplib.SMTP_SSL(smtpHost,hostPort)
         #mtp.ehlo()
-        print  auth
+        #print auth
     elif auth == "tls":
         smtp = smtplib.SMTP(smtpHost,hostPort)
         smtp.ehlo()
@@ -110,15 +111,15 @@ config.read("config.ini")
 
 print config.get("global", "startAuth")
 print config.get("global", "username")
-startAuth=config.get("global", "startAuth")#1
-isdebug=config.get("global", "startAuth")#1
-smtpHost=config.get("global", "smtpHost")#"smtp.gmail.com"
-hostPort=config.get("global", "hostPort")#465
-sender = config.get("global", "sender")#'woshishui888888@gmail.com'
-username = config.get("global", "username")#'woshishui888888@gmail.com'
-password =  config.get("global", "password")#'admin888'
-subject=config.get("global", "subject")#"TESTmail"
-auth=config.get("global", "auth")#"ssl"
+startAuth=config.get("global", "startAuth")
+isdebug=config.get("global", "startAuth")
+smtpHost=config.get("global", "smtpHost")
+hostPort=config.get("global", "hostPort")
+sender = config.get("global", "sender")
+username = config.get("global", "username")
+password =  config.get("global", "password")
+subject=config.get("global", "subject")
+auth=config.get("global", "auth")
 print password
 
 ######################################################
