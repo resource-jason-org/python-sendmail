@@ -52,6 +52,8 @@ def _format_addr(s):
         addr.encode('utf-8') if isinstance(addr, unicode) else addr))
 #sendMail(subject);
 def readMail():
+    print Sleep
+    #exit()
     filename="emailList.xml"
     if os.path.exists(filename):
         message = 'Start SendMail Script'
@@ -87,7 +89,8 @@ def readMail():
             f.close();
             print email+" Send Complete\n"
             print "------------------------"
-            time.sleep(5)
+            print "sleep -----> "+Sleep
+            time.sleep(float(Sleep))
 
 open('mailcontent.html', 'a')
 open('emailList.xml', 'a')
@@ -99,7 +102,7 @@ if os.path.exists(filename):
     print  ''
 else:
     f = open('mailcontent.html', 'a')
-    print "emailList.xml is empty !"
+    print "mailcontent.html is not exit , we will create it!"
     time.sleep(5)
     exit("mailcontent.html is not exit , we will create it!");
 
@@ -109,7 +112,7 @@ try:
 finally:
     file_object.close()
 if content=="":
-    print "emailList.xml is empty !"
+    print "mailcontent.html is empty!"
     time.sleep(5)
     exit("mailcontent.html is empty!");
 
@@ -120,6 +123,7 @@ config.read("config.ini")
 
 #print config.get("global", "startAuth")
 #print config.get("global", "username")
+Sleep=config.get("global", "sleep")
 startAuth=config.get("global", "startAuth")
 isdebug=config.get("global", "startAuth")
 smtpHost=config.get("global", "smtpHost")
@@ -130,7 +134,9 @@ username = config.get("global", "username")
 password =  config.get("global", "password")
 subject=config.get("global", "subject")
 auth=config.get("global", "auth")
-#print password
+
+
+#print proccessSleep
 
 ######################################################
 

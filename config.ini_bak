@@ -9,3 +9,4 @@ username =this is smtp username
 password =this is smtp password
 subject=this is subject
 auth=ssl
+sleep=3
