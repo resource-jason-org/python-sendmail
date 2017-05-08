@@ -15,7 +15,7 @@ def sendMail(receiver):
     # Create message container - the correct MIME type is multipart/alternative.
     msg = MIMEMultipart('alternative')
     msg['Subject'] = subject
-    msg['From'] = _format_addr(u'<%s>' % sender)
+    msg['From'] = Header(sendername, 'utf-8').encode()+'<'+sender+'>' #_format_addr(u'tester<%s>' % sender)
     msg['To'] = _format_addr(u'<%s>' % receiver)
     # msg['Cc'] = _format_addr(u'<%s>' % receiver)
     #Create message html content
@@ -46,6 +46,7 @@ def sendMail(receiver):
 
 def _format_addr(s):
     name, addr = parseaddr(s)
+    print name
     return formataddr(( \
         Header(name, 'utf-8').encode(), \
         addr.encode('utf-8') if isinstance(addr, unicode) else addr))
@@ -56,6 +57,8 @@ def readMail():
         message = 'Start SendMail Script'
     else:
         f = open('emailList.xml', 'a')
+        print "emailList.xml is empty !"
+        time.sleep(5)
         exit("emailList.xml is empty !");
 
     file_object = open(filename,'r')
@@ -65,6 +68,8 @@ def readMail():
         file_object.close()
 
     if all_the_text == "":
+        print "emailList.xml is empty !"
+        time.sleep(5)
         exit("emailList is empty!");
 
     all_the_text,result=re.subn('\\n|\\r', "", all_the_text)
@@ -94,6 +99,8 @@ if os.path.exists(filename):
     print  ''
 else:
     f = open('mailcontent.html', 'a')
+    print "emailList.xml is empty !"
+    time.sleep(5)
     exit("mailcontent.html is not exit , we will create it!");
 
 file_object = open(filename, 'r')
@@ -102,6 +109,8 @@ try:
 finally:
     file_object.close()
 if content=="":
+    print "emailList.xml is empty !"
+    time.sleep(5)
     exit("mailcontent.html is empty!");
 
 #####################################################
@@ -109,18 +118,19 @@ if content=="":
 config = ConfigParser.ConfigParser()
 config.read("config.ini")
 
-print config.get("global", "startAuth")
-print config.get("global", "username")
+#print config.get("global", "startAuth")
+#print config.get("global", "username")
 startAuth=config.get("global", "startAuth")
 isdebug=config.get("global", "startAuth")
 smtpHost=config.get("global", "smtpHost")
 hostPort=config.get("global", "hostPort")
+sendername=config.get("global", "sendername")
 sender = config.get("global", "sender")
 username = config.get("global", "username")
 password =  config.get("global", "password")
 subject=config.get("global", "subject")
 auth=config.get("global", "auth")
-print password
+#print password
 
 ######################################################
 
