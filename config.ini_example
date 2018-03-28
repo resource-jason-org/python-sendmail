@@ -1,0 +1,12 @@
+[global]
+startAuth=1
+isdebug=1
+smtpHost=this is smtp HOST
+hostPort=this is host Port
+sendername=this is sender name
+sender =this is sender email
+username =this is smtp username
+password =this is smtp password
+subject=this is subject
+auth=ssl
+sleep=3
